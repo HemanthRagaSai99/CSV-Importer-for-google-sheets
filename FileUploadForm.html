@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+</head>
+<body>
+  <form>
+    <input type="file" name="csvFile" id="csvFile" accept=".csv">
+    <input type="button" value="Upload" onclick="uploadFile()">
+  </form>
+
+  <script>
+    function uploadFile() {
+      var fileInput = document.getElementById('csvFile');
+      var file = fileInput.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        google.script.run.importCSVData(e.target.result);
+        google.script.host.close();
+      };
+
+      reader.readAsText(file);
+    }
+  </script>
+</body>
+</html>
